@@ -43,9 +43,9 @@
 
 <h2 id="abstract">1. Abstract<a name="abstract"></a></h2>
 <p>The source style transfer task in voice conversion (VC) aims to transfer source speech's style to the target, which is essential in many scenarios with high expressive source speech, such as dubbing, live broadcasting, and data augmentation. Previous work generally took explicit prosodic features or fixed-length style embedding extracted from source speech to implement source style transfer which is insufficient to achieve comprehensive style modelling and maintain high speaker similarity. To solve these problems, based on the recognition-synthesis framework, we propose a hierarchical source style transfer method, including our proposed multi-scale style module and explicit constrain module. In the proposed multi-scale style module, style is modelled in a hierarchical manner to obtain different level style representations. Meanwhile, we adopt features with different characteristics as each level's input. Specifically, prosodic features are used to explicit model frame-level style variation while bottleneck features and self-supervised features are adopted to implicitly model segment-level style strength and global-level style category, respectively. Moreover, to balance the performance of source style transfer and speaker similarity, we introduced an explicit constrain module consisting of a pre-trained speech emotion recognition model and a speaker classifier. Finally, to alleviate the mismatch between training and inference, we simulate the process of inference during training. Extensive experiments are conducted on a Mandarin multi-speaker reading corpus. The subjective and objective results demonstrate that our proposed method is superior to the state-of-the-art VC methods on transferring source speech's style. Furthermore, ablation analysis suggests the indispensable of every style level and effectiveness of our proposed module. </p>
-	<center><img src='fig/model.pdf' width=1300px></center>
 <br><br>
 
+<center><img src='fig/model.pdf' width=1300px></center>
 <h2>2. System Description<a name="system"></a></h2>
 <blockquote>
 Comparison Systems
@@ -72,7 +72,7 @@ Comparison Systems
       <td style="text-align: center; width: 150px;" rowspan=1><strong>HSM-VC(proposed)<strong></td>
     </tr>
     <tr>
-      <td style="text-align: center; width: 150px;" rowspan=20><strong>DB1<strong><audio style="width: 150px;" controls="" preload="none" src="sample/db1/db-1_000001.wav"></audio><audio style="width: 150px;" controls="" preload="none" src="sample/db1/db-1_000019.wav"></audio><audio style="width: 150px;" controls="" preload="none" src="sample/db1/db-1_000051.wav"><audio style="width: 150px;" controls="" preload="none" src="sample/db1/db-1_000080.wav"></audio><audio style="width: 150px;" controls="" preload="none" src="sample/db1/db-1_000115.wav"></audio></td>
+      <td style="text-align: center; width: 150px;" rowspan=21><strong>DB1<strong><audio style="width: 150px;" controls="" preload="none" src="sample/db1/db-1_000001.wav"></audio><audio style="width: 150px;" controls="" preload="none" src="sample/db1/db-1_000019.wav"></audio><audio style="width: 150px;" controls="" preload="none" src="sample/db1/db-1_000051.wav"><audio style="width: 150px;" controls="" preload="none" src="sample/db1/db-1_000080.wav"></audio><audio style="width: 150px;" controls="" preload="none" src="sample/db1/db-1_000115.wav"></audio></td>
         <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/comparision/source/VCF1_110006.wav"></audio></td>
         <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/comparision/GST-VC/VCF1_110006.wav"></audio></td>
         <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/comparision/REF-VC/VCF1_110006.wav"></audio></td>
