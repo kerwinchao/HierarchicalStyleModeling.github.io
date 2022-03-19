@@ -2,12 +2,12 @@
 <!-- saved from url=(0033)https://kerwinchao.github.io/Oneshotvc.github.io// -->
 <html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
-<title>HSM-VC: Hierarchical Style Modeling for Non-Parallel Voice Conversion</title>
+<title>MSM-VC: Multi-scale Style Modeling for Non-Parallel Voice Conversion</title>
 <meta name="generator" content="Jekyll v3.9.0">
 <meta property="og:title" content="TODO: title">
 <meta property="og:locale" content="en_US">
-<link rel="canonical" href="https://kerwinchao.github.io/HierarchicalStyleVC.github.io//">
-<meta property="og:url" content="https://kerwinchao.github.io/HierarchicalStyleVC.github.io//">
+<link rel="canonical" href="https://kerwinchao.github.io/VCStyleModeling.github.io//">
+<meta property="og:url" content="https://kerwinchao.github.io/VCStyleModeling.github.io//">
 <meta name="twitter:card" content="summary">
 <!-- End Jekyll SEO tag -->
 
@@ -24,8 +24,8 @@
     </section>
 
 <section class="main-content">
-    <h1 id=""><center>HSM-VC: Hierarchical Style Modeling for Non-Parallel Voice Conversion</center></h1>
-    <center> Zhichao Wang<sup>1</sup>, Xingshen Wang<sup>1</sup>, Qicong Xie<sup>1</sup>, Tao Li<sup>1</sup>, Hongqiang Du<sup>1</sup>, Lei Xie<sup>1</sup>, Yuanzhe Chen<sup>2</sup>, Qiao Tian<sup>2</sup>, Yuping Wang<sup>2</sup>, Yuxuan Wang<sup>2</sup> </center>
+    <h1 id=""><center>MSM-VC: Multi-scale Style Modeling for Non-Parallel Voice Conversion</center></h1>
+    <center> Zhichao Wang<sup>1</sup>, Xingshen Wang<sup>1</sup>, Qicong Xie<sup>1</sup>, Tao Li<sup>1</sup>, Lei Xie<sup>1</sup>, Yuanzhe Chen<sup>2</sup>, Qiao Tian<sup>2</sup>, Yuping Wang<sup>2</sup>, Yuxuan Wang<sup>2</sup> </center>
     <center> <sup>1</sup> Audio, Speech and Language Processing Group (ASLP@NPU), School of Computer Science, Northwestern Polytechnical University, Xi'an, China</center>
     <center> <sup>2</sup> SAMi, ByteDance Inc., Shanghai, China</center>
 
@@ -42,7 +42,7 @@
 </ul>
 
 <h2 id="abstract">1. Abstract<a name="abstract"></a></h2>
-<p>The source style transfer task in voice conversion (VC) aims to transfer source speech's style to the target, which is essential in many scenarios with high expressive source speech, such as dubbing, live broadcasting, and data augmentation. Previous work generally took explicit prosodic features or fixed-length style embedding extracted from source speech to implement source style transfer which is insufficient to achieve comprehensive style modelling and maintain high speaker similarity. To solve these problems, based on the recognition-synthesis framework, we propose a hierarchical source style transfer method, including our proposed multi-scale style module and explicit constrain module. In the proposed multi-scale style module, style is modelled in a hierarchical manner to obtain different level style representations. Meanwhile, we adopt features with different characteristics as each level's input. Specifically, prosodic features are used to explicit model frame-level style variation while bottleneck features and self-supervised features are adopted to implicitly model segment-level style strength and global-level style category, respectively. Moreover, to balance the performance of source style transfer and speaker similarity, we introduced an explicit constrain module consisting of a pre-trained speech emotion recognition model and a speaker classifier. Finally, to alleviate the mismatch between training and inference, we simulate the process of inference during training. Extensive experiments are conducted on a Mandarin multi-speaker reading corpus. The subjective and objective results demonstrate that our proposed method is superior to the state-of-the-art VC methods on transferring source speech's style. Furthermore, ablation analysis suggests the indispensable of every style level and effectiveness of our proposed module. </p>
+<p>In addition to conveying the linguistic content from source speech to converted speech, maintaining the speaking style of source speech also plays an important role in the voice conversion (VC) task, which is essential in many scenarios with high expressive source speech, such as dubbing, live broadcasting, and data augmentation. Previous work generally took explicit prosodic features or fixed-length style embedding extracted from source speech to model the speaking style of source speech, which is insufficient to achieve comprehensive style modelling and target speaker timbre's preserving. Inspired by the prosody's multi-scale nature of human speech, a multi-scale style modeling method for the VC task, referred to as MSM-VC, is proposed in this paper. MSM-VC models the speaking style of source speech from different levels, i.e., global level, local level, and frame level. To effectively convey the speaking style and meanwhile prevent the timbre leakage from source speech to converted speech, each level's prosody is modeled by specific representation. To be specific, explicit prosodic features, pre-trained ASR model's bottleneck features, and features extracted by a model trained with self-supervised strategy, are adopted to model the frame-level style, local-level style, and global-level style, respectively. Besides, to balance the performance of source style modeling and target timbre preserving, an explicit constrain module consisting of a pre-trained speech emotion recognition model and a speaker classifier is introduced to MSM-VC. This explicit constrain module also makes it possible to simulate the inference process during the training to alleviate the mismatch between training and inference. Extensive experiments conducted on a Mandarin multi-speaker reading corpus demonstrate that MSM-VC is superior to the state-of-the-art VC methods on VC task. Furthermore, ablation analysis indicates the indispensable of every style level's modeling and effectiveness of each module.  </p>
 <br><br>
 
 <center><img src='fig/model.pdf' width=1300px></center>
@@ -69,7 +69,7 @@ Comparison Systems
       <td style="text-align: center; width: 150px;" rowspan=1><strong>GST-VC<strong></td>
       <td style="text-align: center; width: 150px;" rowspan=1><strong>REF-VC<strong></td>
       <td style="text-align: center; width: 150px;" rowspan=1><strong>Hybrid-VC<strong></td>
-      <td style="text-align: center; width: 150px;" rowspan=1><strong>HSM-VC(proposed)<strong></td>
+      <td style="text-align: center; width: 150px;" rowspan=1><strong>MSM-VC(proposed)<strong></td>
     </tr>
     <tr>
       <td style="text-align: center; width: 150px;" rowspan=21><strong>DB1<strong><audio style="width: 150px;" controls="" preload="none" src="sample/db1/db-1_000001.wav"></audio><audio style="width: 150px;" controls="" preload="none" src="sample/db1/db-1_000019.wav"></audio><audio style="width: 150px;" controls="" preload="none" src="sample/db1/db-1_000051.wav"><audio style="width: 150px;" controls="" preload="none" src="sample/db1/db-1_000080.wav"></audio><audio style="width: 150px;" controls="" preload="none" src="sample/db1/db-1_000115.wav"></audio></td>
@@ -275,7 +275,7 @@ Comparison Systems
         <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/ablation/noglo/VCF1_110006.wav"></audio></td>
         <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/ablation/nolocal/VCF1_110006.wav"></audio></td>
         <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/ablation/noframe/VCF1_110006.wav"></audio></td>
-        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/comparision/HSM-VC/VCF1_110006.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/comparision/MSM-VC/VCF1_110006.wav"></audio></td>
     </tr>
 
 
