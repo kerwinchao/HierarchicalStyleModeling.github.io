@@ -2,7 +2,7 @@
 <!-- saved from url=(0033)https://kerwinchao.github.io/Oneshotvc.github.io// -->
 <html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
-<title>MSM-VC: Multi-scale Style Modeling for Non-Parallel Voice Conversion</title>
+<title>MSM-VC: High-fidelity Source Style Transfer for Non-Parallel Voice Conversion by Multi-scale Style Modeling</title>
 <meta name="generator" content="Jekyll v3.9.0">
 <meta property="og:title" content="TODO: title">
 <meta property="og:locale" content="en_US">
@@ -24,25 +24,26 @@
     </section>
 
 <section class="main-content">
-    <h1 id=""><center>MSM-VC: Multi-scale Style Modeling for Non-Parallel Voice Conversion</center></h1>
-    <center> Zhichao Wang<sup>1</sup>, Xingshen Wang<sup>1</sup>, Qicong Xie<sup>1</sup>, Tao Li<sup>1</sup>, Lei Xie<sup>1</sup>, Yuanzhe Chen<sup>2</sup>, Qiao Tian<sup>2</sup>, Yuping Wang<sup>2</sup> </center>
+    <h1 id=""><center>MSM-VC: High-fidelity Source Style Transfer for Non-Parallel Voice Conversion by Multi-scale Style Modeling</center></h1>
+    <center> Zhichao Wang<sup>1</sup>, Xingshen Wang<sup>1</sup>, Qicong Xie<sup>1</sup>, Tao Li<sup>1</sup>, Lei Xie<sup>1</sup>, Qiao Tian<sup>2</sup>, Yuping Wang<sup>2</sup> </center>
     <center> <sup>1</sup> Audio, Speech and Language Processing Group (ASLP@NPU), School of Computer Science, Northwestern Polytechnical University, Xi'an, China</center>
-    <center> <sup>2</sup> Speech, Audio, and Music Intelligence (SAMI) Group, ByteDance, Shanghai, China</center>
+    <center> <sup>2</sup> Speech, Audio \& Music Intelligence (SAMI), ByteDance</center>
 
 <h2>Contents</h2>
 <ul>
   <li><a href="#abstract">Abstract</a></li>
   <li><a href="#system">System Description</a></li>
   <li><a href="#comparison">Demos -- Comparison Analysis</a></li>
-  <li><a href="#ablation">Demos -- Ablation Analysis</a></li>
+  <li><a href="#ablation">Demos -- Effectiveness of different style level</a></li>
+  <li><a href="#more">More Demos in Other Dataset</a></li>
   <ul>
-    <li><a href="#mutiscale">Effectiveness of different style level</a></li>
-    <li><a href="#ecm">Validation of explicit constrain module</a></li>
+    <li><a href="#cc">Chinese Corpus</a></li>
+    <li><a href="#ec">English Corpus</a></li>
   </ul>
 </ul>
 
 <h2 id="abstract">1. Abstract<a name="abstract"></a></h2>
-<p>In addition to conveying the linguistic content from source speech to converted speech, maintaining the speaking style of source speech also plays an important role in the voice conversion (VC) task, which is essential in many scenarios with high expressive source speech, such as dubbing, live broadcasting, and data augmentation. Previous work generally took explicit prosodic features or fixed-length style embedding extracted from source speech to model the speaking style of source speech, which is insufficient to achieve comprehensive style modeling and target speaker timbre's preservation. Inspired by the style's multi-scale nature of human speech, a multi-scale style modeling method for the VC task, referred to as MSM-VC, is proposed in this paper. MSM-VC models the speaking style of source speech from different levels, i.e., global level, local level, and frame level. To effectively convey the speaking style and meanwhile prevent timbre leakage from source speech to converted speech, each level's style is modeled by specific representation. To be specific, explicit prosodic features, pre-trained ASR model's bottleneck features, and features extracted by a model trained with self-supervised strategy, are adopted to model the frame-level style, local-level style, and global-level style, respectively. Besides, to balance the performance of source style modeling and target timbre preservation, an explicit constraint module consisting of a pre-trained speech emotion recognition model and a speaker classifier is introduced to MSM-VC. This explicit constraint module also makes it possible to simulate the inference process during the training to alleviate the mismatch between training and inference. Extensive experiments validated on highly expressive speeches demonstrate that MSM-VC is superior to the state-of-the-art VC methods on VC task. Furthermore, ablation analysis indicates the indispensable of every style level's modeling and effectiveness of each module. </p>
+<p>In addition to conveying the linguistic content from source speech to converted speech, maintaining the speaking style of source speech also plays an important role in the voice conversion (VC) task, which is essential in many scenarios with highly expressive source speech, such as dubbing and data augmentation. Previous work generally took explicit prosodic features or fixed-length style embedding extracted from source speech to model the speaking style of source speech, which is insufficient to achieve comprehensive style modeling and target speaker timbre preservation. Inspired by the style's multi-scale nature of human speech, a multi-scale style modeling method for the VC task, referred to as MSM-VC, is proposed in this paper. MSM-VC models the speaking style of source speech from different levels, i.e., global, local, and frame levels. To effectively convey the speaking style and meanwhile prevent timbre leakage from source speech to converted speech, each level's style is modeled by specific representation. Specifically, explicit prosodic features, pre-trained ASR model's bottleneck features, and features extracted by a model trained with self-supervised strategy are adopted to model the frame, local, and global-level styles, respectively. Besides, to balance the performance of source style modeling and target speaker timbre preservation, an explicit constraint module consisting of a pre-trained speech emotion recognition model and a speaker classifier is introduced to MSM-VC. This explicit constraint module also makes it possible to simulate the inference process during the training to alleviate the mismatch between training and inference. Experiments performed on the highly expressive speech corpus demonstrate that MSM-VC is superior to the state-of-the-art VC methods on modeling source speech style while maintaining good speech quality and speaker similarity. Furthermore, ablation analysis indicates the indispensable of every style level's modeling and the effectiveness of each module.  </p>
 <br><br>
 
 <center><img src='fig/model.jpg' width=1300px></center>
@@ -53,7 +54,7 @@ Comparison Systems
 <li>GST-VC</li>
 <li>REF-VC</li>
 <li>Hybrid-VC</li>
-<li>HSM-VC:our proposed system</li>
+<li>MSM-VC:our proposed system</li>
 </ul>
 
 <h2>3. Demos -- Comparison Analysis<a name="comparison"></a></h2>
@@ -383,65 +384,127 @@ Comparison Systems
 </tbody>
 </table>
 
+<h2>More Demos in Other Dataset<a name="more"></a></h2>
 
+<!-- <h3>5.1. Aishell3<a name="aishell3"></a></h2>
+<table>
+  <tbody>
+    <tr>
+        <td style="text-align: center; width: 150px;" rowspan=2><strong>Source speech<strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: center; width: 150px;" rowspan=1><strong>female<strong><audio style="width: 150px;" controls="" preload="none" src="sample/spk/SSB1782_SSB17820005.wav"></audio><audio style="width: 150px;" controls="" preload="none" src="sample/spk/SSB1782_SSB17820064.wav"></audio></td>
+      <td style="text-align: center; width: 150px;" rowspan=1><strong>male<strong><audio style="width: 150px;" controls="" preload="none" src="sample/spk/SSB1935_SSB19350001.wav"></audio><audio style="width: 150px;" controls="" preload="none" src="sample/spk/SSB1935_SSB19350005.wav"></audio></td>
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/aishell3/source/VCF1_140002.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/aishell3/SSB1782/VCF1_140002.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/aishell3/SSB1935/VCF1_140002.wav"></audio></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/aishell3/source/VCF1_150001.wav"></audio></td>
+      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/aishell3/SSB1782/VCF1_150001.wav"></audio></td>
+      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/aishell3/SSB1935/VCF1_150001.wav"></audio></td>
+  </tr>
+  <tr>
+    <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/aishell3/source/VCF1_150002.wav"></audio></td>
+    <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/aishell3/SSB1782/VCF1_150002.wav"></audio></td>
+    <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/aishell3/SSB1935/VCF1_150002.wav"></audio></td>
+</tr>
+<tr>
+  <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/aishell3/source/VCF1_160002.wav"></audio></td>
+  <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/aishell3/SSB1782/VCF1_160002.wav"></audio></td>
+  <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/aishell3/SSB1935/VCF1_160002.wav"></audio></td>
+</tr>
+<tr>
+  <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/aishell3/source/VCF1_150004.wav"></audio></td>
+  <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/aishell3/SSB1782/VCF1_150004.wav"></audio></td>
+  <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/aishell3/SSB1935/VCF1_150004.wav"></audio></td>
+</tr>
+</tbody>
+</table> -->
 
-<!-- <h2>5. Demos & Visualization -- Varying Duration<a name="duration"></a></h2>
+<h3>5.1. Chinese Corpus<a name="cc"></a></h2>
   <table>
-    <thead>
-      <tr>
-        <th style="text-align: center"><strong>Target Speaker</strong></th>
-        <th style="text-align: center"><strong>Source Audio</strong></th>
-        <th style="text-align: center"><strong>1s</strong></th>
-        <th style="text-align: center"><strong>3s</strong></th>
-        <th style="text-align: center"><strong>6s</strong></th>
-        <th style="text-align: center"><strong>9s</strong></th>
-        <th style="text-align: center"><strong>15s</strong></th>
-      </tr>
-    </thead>
     <tbody>
       <tr>
-        <th rowspan=4 style="text-align: left ;width: 150px"><audio style="width: 150px" src="sample/duration/target-speaker/slt_arctic_a0013.wav" controls="" preload=""></audio><audio style="width: 150px" src="sample/duration/target-speaker/slt_arctic_a0014.wav" controls="" preload=""></audio></th>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/source/clb_arctic_a0007.wav" controls="" preload=""></audio></td>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/1s/clb_arctic_a0007.wav" controls="" preload=""></audio></td>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/3s/clb_arctic_a0007.wav" controls="" preload=""></audio></td>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/6s/clb_arctic_a0007.wav" controls="" preload=""></audio></td>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/9s/clb_arctic_a0007.wav" controls="" preload=""></audio></td>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/15s/clb_arctic_a0007.wav" controls="" preload=""></audio></td>
-
+          <td style="text-align: center; width: 150px;" rowspan=2><strong>Source speech<strong></td>
       </tr>
       <tr>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/source/rms_arctic_a0002.wav" controls="" preload=""></audio></td>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/1s/rms_arctic_a0002.wav" controls="" preload=""></audio></td>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/1s/rms_arctic_a0002.wav" controls="" preload=""></audio></td>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/1s/rms_arctic_a0002.wav" controls="" preload=""></audio></td>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/1s/rms_arctic_a0002.wav" controls="" preload=""></audio></td>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/1s/rms_arctic_a0002.wav" controls="" preload=""></audio></td>
-  
+        <td style="text-align: center; width: 150px;" rowspan=1><strong>female<strong><audio style="width: 150px;" controls="" preload="none" src="sample/spk/F1_070001.wav"></audio><audio style="width: 150px;" controls="" preload="none" src="sample/spk/F1_070002.wav"></audio></td>
+        <td style="text-align: center; width: 150px;" rowspan=1><strong>male<strong><audio style="width: 150px;" controls="" preload="none" src="sample/spk/M1_070001.wav"></audio><audio style="width: 150px;" controls="" preload="none" src="sample/spk/M1_070002.wav"></audio></td>
       </tr>
       <tr>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/source/rms_arctic_a0023.wav" controls="" preload=""></audio></td>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/1s/rms_arctic_a0023.wav" controls="" preload=""></audio></td>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/1s/rms_arctic_a0023.wav" controls="" preload=""></audio></td>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/1s/rms_arctic_a0023.wav" controls="" preload=""></audio></td>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/1s/rms_arctic_a0023.wav" controls="" preload=""></audio></td>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/1s/rms_arctic_a0023.wav" controls="" preload=""></audio></td>
-  
+          <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/chinese/source/4.wav"></audio></td>
+          <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/chinese/female/4.wav"></audio></td>
+          <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/chinese/male/4.wav"></audio></td>
       </tr>
-
       <tr>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/source/clb_arctic_a0024.wav" controls="" preload=""></audio></td>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/1s/clb_arctic_a0024.wav" controls="" preload=""></audio></td>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/3s/clb_arctic_a0024.wav" controls="" preload=""></audio></td>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/6s/clb_arctic_a0024.wav" controls="" preload=""></audio></td>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/9s/clb_arctic_a0024.wav" controls="" preload=""></audio></td>
-        <td style="text-align: left;width: 150px"><audio style="width: 150px" src="sample/duration/15s/clb_arctic_a0024.wav" controls="" preload=""></audio></td>
-  
-      </tr>
-     
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/chinese/source/5.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/chinese/female/5.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/chinese/male/5.wav"></audio></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/chinese/source/movie_06.wav"></audio></td>
+      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/chinese/female/movie_06.wav"></audio></td>
+      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/chinese/male/movie_06.wav"></audio></td>
+  </tr>
+  <tr>
+    <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/chinese/source/movie_07.wav"></audio></td>
+    <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/chinese/female/movie_07.wav"></audio></td>
+    <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/chinese/male/movie_07.wav"></audio></td>
+</tr>
+<tr>
+  <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/chinese/source/movie_08.wav"></audio></td>
+  <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/chinese/female/movie_08.wav"></audio></td>
+  <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/chinese/male/movie_08.wav"></audio></td>
+</tr>
 
-     
+  </tbody>
+  </table>
+
+  <h3>5.2. English Dubbing<a name="cc"></a></h2>
+    <table>
+      <tbody>
+        <tr>
+          <td style="text-align: center; width: 150px;" rowspan=1><strong>Source speech<strong></td>
+          <td style="text-align: center; width: 150px;" rowspan=1><strong>female<strong><audio style="width: 150px;" controls="" preload="none" src="sample/spk/fS02E01_01_R.wav"></audio><audio style="width: 150px;" controls="" preload="none" src="sample/spk/fS02E01_02_L.wav"></audio></td>
+            <td style="text-align: center; width: 150px;" rowspan=1><strong>Source speech<strong></td>
+              <td style="text-align: center; width: 150px;" rowspan=1><strong>male<strong><audio style="width: 150px;" controls="" preload="none" src="sample/spk/mS02E01_003_R.wav"></audio><audio style="width: 150px;" controls="" preload="none" src="sample/spk/mS02E01_004_R.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/english/source/livingalone_02_benson_0001.wav"></audio></td>
+            <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/english/female/livingalone_02_benson_0001.wav"></audio></td>
+            <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/english/source/livingalone_02_benson_0001.wav"></audio></td>
+            <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/english/female/livingalone_02_benson_0001.wav"></audio></td>
+        </tr>
+        <tr>
+          <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/english/source/livingalone_02_benson_0003.wav"></audio></td>
+          <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/english/female/livingalone_02_benson_0003.wav"></audio></td>
+          <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/english/source/celebratedcrimesv1_13_dumas_0023.wav"></audio></td>
+          <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/english/male/celebratedcrimesv1_13_dumas_0023.wav"></audio></td>
+      </tr>
+      <tr>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/english/source/livingalone_02_benson_0004.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/english/female/livingalone_02_benson_0004.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/english/source/celebratedcrimesv1_13_dumas_0024.wav"></audio></td>
+        <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/english/male/celebratedcrimesv1_13_dumas_0024.wav"></audio></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/english/source/livingalone_02_benson_0005.wav"></audio></td>
+      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/english/female/livingalone_02_benson_0005.wav"></audio></td>
+      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/english/source/celebratedcrimesv1_13_dumas_0025.wav"></audio></td>
+      <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/english/male/celebratedcrimesv1_13_dumas_0025.wav"></audio></td>
+  </tr>
+  <tr>
+    <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/english/source/livingalone_02_benson_0006.wav"></audio></td>
+    <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/english/female/livingalone_02_benson_0006.wav"></audio></td>
+    <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/english/source/celebratedcrimesv1_13_dumas_0026.wav"></audio></td>
+    <td style="text-align: center"><audio style="width: 150px;" controls="" preload="none" src="sample/english/male/celebratedcrimesv1_13_dumas_0026.wav"></audio></td>
+</tr>
+  
     </tbody>
-  </table> -->
+    </table>
 
       <footer class="site-footer">
         
